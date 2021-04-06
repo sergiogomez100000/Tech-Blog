@@ -7,10 +7,10 @@ const homeRoutes = require("./homeRoutes.js");
 // require homeRoutes
 // require dashboardRoutes --> separate from homeRoutes, if you finish the homeRoutes firs
 
-// router.use("/", homeRoutes);
+router.use("/", homeRoutes);
 router.use("/", homeRoutes);
 // router.use("dashboard", dashboardRoutes);
-// router.use("/api", apiRoutes);
+router.use("/api", apiRoutes);
 router.use("/api", apiRoutes);
 
 

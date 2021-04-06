@@ -1,35 +1,36 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 const sequelize = require("../config/connection");
+
 //get all posts 
 router.get("/", async (req, res) => {
   try {
-    Post.findAll({
-      attributes: ["id", "title", "body", "user_id"],
+    const allPostData = await Post.findAll({
+      attributes: ["id", "post_title", "post_text", "user_id"],
       include: [
-        {
-          model: User,
-          as: "user",
-          attributes: ["username"],
-        },
         {
           model: Comment,
           as: "comments",
           attributes: ["id", "comment_text", "user_id"],
         },
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        }
       ],
     })
-    // render what you get back -- might have to map over the data before rendering
-    // res.render(allPosts)
+     const allPosts = allPostData.map((post)=>post.get({plain: true}));
+     res.render('allposts',{allPosts, loggedIn: req.session.loggedIn})
   } catch (err) {
-    console.status(500).console(err)
+    console.status(500).json(err)
   }
 });
 
 //get one post
 router.get("/posts/:id", async (req, res) => {
   try {
-    Post.findOne({
+    const onePostData = await Post.findOne({
       where: {
         id: req.params.id,
       },
@@ -46,6 +47,11 @@ router.get("/posts/:id", async (req, res) => {
           attributes: ["id", "comment_text", "user_id"],
         }]
     })
+    const onePost = onePostData.get({plain: true});
+    const userPost = post.user_id == req.session.user_id;
+    res.render('single-post',{
+      onePost, loggedIn: req.session.loggedIn, currentUser: userPost
+    });
   }catch(err){
     console.status(500).console(err)
   }
@@ -66,7 +72,6 @@ router.get("/post", (req, res) => {
 
 //renders the edit-post view
 router.get("/edit/:id", (req, res) => {
-  //    post_id: req.postID,
   res.render("edit-post", {
     loggedIn: req.session.loggedIn,
     post_id: req.params.id,
