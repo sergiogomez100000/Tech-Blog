@@ -1,0 +1,9 @@
+[{
+    "post_title":"Testing",
+    "post_text":"Testing a post",
+    "user_id":4
+},{
+    "post_title":"Testing",
+    "post_text":"Testing another post",
+    "user_id":3
+}]

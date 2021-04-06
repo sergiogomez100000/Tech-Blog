@@ -1,0 +1,9 @@
+[{
+    "comment_text":"Test comment",
+    "user_id":4,
+    "post_id":1
+},{
+    "comment_text":"Another test comment",
+    "user_id":4,
+    "post_id":2
+}]

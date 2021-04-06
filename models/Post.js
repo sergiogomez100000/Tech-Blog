@@ -18,6 +18,7 @@ Post.init(
       post_text: {
         type: DataTypes.STRING,
         allowNull: false,
+        default: "Enter text here"
       },
       user_id: {
         type: DataTypes.INTEGER,
