@@ -11,19 +11,20 @@ router.get("/", async (req, res) => {
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "comment_text", "user_id"],
+          attributes: ["comment_text"],
         },
         {
           model: User,
           as: "user",
-          attributes: ["username"],
+          attributes: ["name"],
         }
       ],
     })
      const allPosts = allPostData.map((post)=>post.get({plain: true}));
+     console.log(allPosts)
      res.render('allposts',{allPosts, loggedIn: req.session.loggedIn})
   } catch (err) {
-    console.status(500).json(err)
+    res.status(500).json(err)
   }
 });
 
@@ -53,7 +54,7 @@ router.get("/posts/:id", async (req, res) => {
       onePost, loggedIn: req.session.loggedIn, currentUser: userPost
     });
   }catch(err){
-    console.status(500).console(err)
+    res.status(500).json(err)
   }
 });
 
