@@ -22,7 +22,11 @@ router.get("/", async (req, res) => {
     })
     
      const allPosts = allPostData.map((post)=>post.get({plain: true}));
-     console.log(allPosts.comments)
+    //  console.log(allPosts.comments)
+    console.log({allPosts})
+    console.log(allPosts[0].comments[0].comment_text)
+    console.log("allPosts[0].comments[0]: ", allPosts[0].comments[0]);
+    console.log("allPosts[0].user:", allPosts[0].user);
      console.log(allPosts)
      res.render('allposts',{allPosts, loggedIn: req.session.loggedIn})
   } catch (err) {
