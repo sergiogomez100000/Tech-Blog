@@ -3,8 +3,9 @@ const { User, Post, Comment } = require("../../models");
 //get all the users
 router.get("/", async(req, res) => {
   try{
+    console.log("FEtching /api/user")
   const allUsers = await User.findAll({
-    attributes: ["id", "username", "email", "password"],
+    attributes: ["id", "name", "email", "password"],
     include: [
       {
         model: Post,
@@ -32,7 +33,7 @@ router.get("/:id", async (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "username", "email", "password"],
+    attributes: ["id", "name", "email", "password"],
     include: [
       {
         model: Post,
@@ -58,7 +59,7 @@ router.post("/", async(req, res) => {
  try{
   const addUser = await User.create({
     //expects username, email, password
-    username: req.body.username,
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
   })
@@ -79,7 +80,7 @@ router.post("/login", async(req, res) => {
   //find the user whose logging in
   try{
     console.log("req.body",req.body)
-   dbUserData = await User.findOne({
+   const dbUserData = await User.findOne({
     where: {
       email: req.body.email,
     },
