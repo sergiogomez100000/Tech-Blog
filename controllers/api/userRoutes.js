@@ -78,13 +78,13 @@ router.post("/", async(req, res) => {
 router.post("/login", async(req, res) => {
   //find the user whose logging in
   try{
-    console.log(req.body)
+    console.log("req.body",req.body)
    dbUserData = await User.findOne({
     where: {
       email: req.body.email,
     },
   })
-  console.log(dbUserData)
+  console.log("dbUserDAta",dbUserData)
     const validPassword = dbUserData.checkPassword(req.body.password);
       ///if the password isn't correct
       if (!validPassword) {
