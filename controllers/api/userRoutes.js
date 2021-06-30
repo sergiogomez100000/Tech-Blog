@@ -131,7 +131,7 @@ router.delete("/:id", async(req, res) => {
 });
 
 //Log out the user
-router.post("/logout",(req, res) => {
+router.post("/logout",async(req, res) => {
   try{
   if (req.session.loggedIn) {
     req.session.destroy(() => {
