@@ -131,20 +131,15 @@ router.delete("/:id", async(req, res) => {
 });
 
 //Log out the user
-router.post("/logout",async(req, res) => {
-  try{
+router.post("/logout",(req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
+      console.log("session ended!")
       // end the session
       res.status(204).end();
     });
   } else {
     res.status(404).end(); // if there was no session
   }
-}catch(err){
-  console.log("COUD NOT LOG OUT")
-  console.log(err);
-  console.status(500).console(err)
-}
 });
 module.exports = router;
