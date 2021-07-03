@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
         }
       ],
     })
-    
+    //Serialize data so template can read it 
      const allPosts = allPostData.map((post)=>post.get({plain: true}));
     //  console.log(allPosts.comments)
     console.log({allPosts})
@@ -67,6 +67,7 @@ router.get("/posts/:id", async (req, res) => {
 //serve up the login page
 router.get("/login", (req, res) => {
   console.log("Is logged in?", req.session.loggedIn);
+  
   res.render("login", { loggedIn: req.session.loggedIn });
 });
 

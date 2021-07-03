@@ -142,6 +142,7 @@ router.post("/logout",async(req, res) => {
     res.status(404).end(); // if there was no session
   }
 }catch(err){
+  console.log("COUD NOT LOG OUT")
   console.log(err);
   console.status(500).console(err)
 }
