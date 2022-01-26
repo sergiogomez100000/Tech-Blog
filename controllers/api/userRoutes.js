@@ -75,6 +75,7 @@ router.post("/", async(req, res) => {
       res.status(500).json(err);
     };
 });
+
 //log in the user
 router.post("/login", async(req, res) => {
   //find the user whose logging in
@@ -132,6 +133,7 @@ router.delete("/:id", async(req, res) => {
 
 //Log out the user
 router.post("/logout",(req, res) => {
+  res.send("attempting to logout")
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       console.log("session ended!")
